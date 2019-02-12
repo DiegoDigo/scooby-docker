@@ -1,0 +1,25 @@
+version: "3.7"
+
+services:
+  nginx:
+    build:
+      context: ./docker/nginx
+      dockerfile: nginx.dockerfile
+    ports:
+      - "80:80"
+    depends_on:
+      - scooby-api
+    networks:
+      - scooby-networok
+
+  scooby-api:
+    build:
+      context: .
+      dockerfile: ./docker/backend.dockerfile
+    ports:
+      - "8081:8081"
+    networks:
+      - scooby-networok
+
+networks:
+  scooby-networok:
